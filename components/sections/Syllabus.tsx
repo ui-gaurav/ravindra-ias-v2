@@ -1,7 +1,6 @@
-'use client'
-
-import React, { useState } from 'react'
-import { ChevronDown, BookOpen, Clock, HeadphonesIcon } from 'lucide-react'
+import React from 'react'
+import { BookOpen, Clock, HeadphonesIcon } from 'lucide-react'
+import { SyllabusAccordion } from '@/components/ui/syllabus-accordion'
 
 const syllabusData = [
   {
@@ -45,80 +44,32 @@ const features = [
 ]
 
 const Syllabus = () => {
-  const [openIndex, setOpenIndex] = useState<number | null>(0)
-
   return (
-    <section className="py-24 lg:py-32 bg-surface-bright relative overflow-hidden">
-      {/* Subtle orb */}
-      <div className="orb orb-navy w-[400px] h-[400px] -top-40 -left-40 opacity-10" />
-
-      <div className="container mx-auto px-4 lg:px-8 max-w-4xl relative z-10">
+    <section className="py-24 lg:py-32 bg-white relative overflow-hidden">
+      <div className="container mx-auto px-6 lg:px-10 max-w-4xl relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-serif font-bold tracking-tight text-on-surface">
+          <span className="section-overline text-amber-dark mb-4 block">Curriculum</span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-on-surface">
             GS Syllabus Overview
           </h2>
-          <div className="ornament-divider w-24 mx-auto mt-6 mb-6" />
-          <p className="text-on-surface-muted text-lg font-sans">
+          <p className="text-on-surface-muted text-lg mt-5 max-w-lg mx-auto leading-relaxed">
             Deep dive into our comprehensive NCERT-based curriculum.
           </p>
         </div>
 
-        {/* Accordion */}
-        <div className="space-y-4">
-          {syllabusData.map((section, index) => (
-            <div
-              key={index}
-              className={`rounded-2xl overflow-hidden transition-all duration-300 ${
-                openIndex === index
-                  ? 'bg-surface-bright ambient-shadow-lg'
-                  : 'bg-surface-dim hover:bg-surface-bright'
-              } ghost-border`}
-            >
-              <button
-                onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full flex items-center justify-between px-8 py-6 text-left group"
-              >
-                <span className="text-xl font-serif font-semibold text-navy-light">
-                  {section.title}
-                </span>
-                <ChevronDown
-                  className={`h-5 w-5 text-amber transition-transform duration-300 ${
-                    openIndex === index ? 'rotate-180' : ''
-                  }`}
-                />
-              </button>
+        {/* Accordion — Dribbble clean style */}
+        <SyllabusAccordion data={syllabusData} />
 
-              <div
-                className={`overflow-hidden transition-all duration-300 ${
-                  openIndex === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-                }`}
-              >
-                <div className="px-8 pb-8">
-                  <div className="w-full h-px bg-gradient-to-r from-transparent via-amber/30 to-transparent mb-6" />
-                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {section.items.map((item, i) => (
-                      <li key={i} className="flex items-center gap-3 text-on-surface-muted font-sans text-[15px]">
-                        <span className="h-1.5 w-1.5 rounded-full bg-amber flex-shrink-0" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Feature Cards */}
-        <div className="mt-16 grid grid-cols-3 gap-6">
+        {/* Feature Cards — clean grid */}
+        <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-5">
           {features.map((feature, i) => (
-            <div key={i} className="text-center p-6 rounded-2xl bg-surface-dim ghost-border card-hover">
-              <div className="inline-flex p-3 rounded-xl bg-navy-light/10 text-navy-light mb-4">
+            <div key={i} className="text-center p-7 rounded-2xl bg-surface-dim ghost-border card-hover group">
+              <div className="inline-flex p-3.5 rounded-2xl bg-white ambient-shadow text-navy-light mb-5 group-hover:bg-navy-light group-hover:text-white transition-colors duration-300">
                 {feature.icon}
               </div>
-              <div className="text-3xl font-serif font-bold text-navy-light">{feature.value}</div>
-              <div className="text-sm text-on-surface-muted font-sans mt-1 tracking-wide uppercase">
+              <div className="text-3xl md:text-4xl font-bold text-on-surface tracking-tight">{feature.value}</div>
+              <div className="text-xs font-semibold text-on-surface-muted mt-2 tracking-widest uppercase">
                 {feature.label}
               </div>
             </div>

@@ -5,46 +5,45 @@ import { COURSES_DATA } from '@/constants'
 const CourseGrid = () => {
   return (
     <section className="py-24 lg:py-32 bg-surface-dim relative overflow-hidden">
-      {/* Subtle background orb */}
-      <div className="orb orb-gold w-[500px] h-[500px] -bottom-40 -right-40 opacity-10" />
-      <div className="orb orb-navy w-[600px] h-[600px] top-40 -left-60 opacity-5" />
+      {/* Subtle decorative gradient */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-amber/3 to-transparent rounded-full blur-3xl pointer-events-none" />
 
-      <div className="container mx-auto px-4 lg:px-8 relative z-10">
-        {/* Section Header */}
+      <div className="container mx-auto px-6 lg:px-10 relative z-10">
+        {/* Section Header — Dribbble overline style */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-on-surface tracking-tight">
+          <span className="section-overline text-amber-dark mb-4 block">Programs</span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-on-surface tracking-tight">
             Our Specializations
           </h2>
-          <div className="ornament-divider w-24 mx-auto mt-6 mb-6" />
-          <p className="text-on-surface-muted max-w-2xl mx-auto text-lg font-sans leading-relaxed">
+          <p className="text-on-surface-muted max-w-xl mx-auto text-lg mt-5 leading-relaxed">
             Choose from our range of meticulously designed programs for comprehensive mastery.
           </p>
         </div>
 
         {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
           {COURSES_DATA.map((course) => (
             <div
               key={course.id}
-              className={`card-hover relative overflow-hidden rounded-2xl ${course.span} ${course.bg} ghost-border group cursor-pointer flex flex-col ${course.featured ? 'min-h-[280px] md:min-h-[380px]' : 'min-h-[240px]'}`}
+              className={`card-hover relative overflow-hidden rounded-2xl ${course.span} bg-white ghost-border group cursor-pointer flex flex-col ${course.featured ? 'min-h-[280px] md:min-h-[360px]' : 'min-h-[220px]'}`}
             >
-              <div className="p-8 flex flex-col h-full z-10">
+              <div className="p-7 md:p-8 flex flex-col h-full z-10">
                 {/* Icon + Tag Row */}
                 <div className="flex items-start justify-between mb-5">
-                  <div className={`p-3 rounded-xl bg-white text-navy-light ${course.featured ? 'ambient-shadow-lg' : 'ambient-shadow'}`}>
+                  <div className={`p-3 rounded-xl ${course.featured ? 'bg-navy-light/8 text-navy-light ambient-shadow' : 'bg-surface-dim text-navy-light'} transition-colors duration-300 group-hover:bg-navy-light group-hover:text-white`}>
                     {course.icon}
                   </div>
-                  <span className={`text-xs font-semibold px-3 py-1 rounded-full ${course.tagColor}`}>
+                  <span className={`text-[11px] font-bold px-3 py-1 rounded-full tracking-wide uppercase ${course.tagColor}`}>
                     {course.tag}
                   </span>
                 </div>
 
                 {/* Content */}
-                <div className="flex-1 mt-2">
-                  <h3 className={`font-serif font-bold text-on-surface mb-3 ${course.featured ? 'text-2xl md:text-3xl' : 'text-xl'}`}>
+                <div className="flex-1 mt-1">
+                  <h3 className={`font-bold text-on-surface mb-2.5 tracking-tight ${course.featured ? 'text-2xl md:text-[1.75rem]' : 'text-lg'}`}>
                     {course.title}
                   </h3>
-                  <p className={`text-on-surface-muted leading-relaxed font-sans ${course.featured ? 'text-base max-w-sm' : 'text-sm max-w-[280px]'}`}>
+                  <p className={`text-on-surface-muted leading-relaxed ${course.featured ? 'text-[15px] max-w-sm' : 'text-sm max-w-[280px]'}`}>
                     {course.description}
                   </p>
                 </div>
@@ -52,22 +51,25 @@ const CourseGrid = () => {
                 {/* Action */}
                 <div className="mt-6">
                   {course.featured ? (
-                    <button className="gradient-cta text-white font-semibold px-8 py-3 rounded-full text-sm flex items-center gap-2 shadow-lg group-hover:px-9 transition-all">
-                      Begin Foundation <ArrowRight className="h-4 w-4" />
+                    <button className="gradient-cta active-press text-white font-semibold px-7 py-3 rounded-full text-sm flex items-center gap-2.5 shadow-md group-hover:shadow-lg transition-shadow">
+                      Begin Foundation <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
                     </button>
                   ) : (
-                    <span className="inline-flex items-center gap-1 text-sm font-semibold text-navy-light group-hover:text-amber-dark transition-colors">
+                    <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-on-surface-muted group-hover:text-navy-light transition-colors duration-300">
                       Explore Track
-                      <ChevronRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                      <ChevronRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
                     </span>
                   )}
                 </div>
               </div>
-              
-              {/* Decorative background accent for featured cards */}
+
+              {/* Decorative accent on featured hover */}
               {course.featured && (
-                <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-gradient-to-tl from-amber/20 to-transparent rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute -bottom-20 -right-20 w-56 h-56 bg-gradient-to-tl from-amber/10 to-transparent rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
               )}
+
+              {/* Subtle top border accent on hover */}
+              <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-navy-light via-amber to-gold scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
             </div>
           ))}
         </div>
